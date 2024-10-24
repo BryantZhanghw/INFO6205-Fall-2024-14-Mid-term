@@ -28,13 +28,34 @@ public class LargestLevelSum {
     public static int maxLevelSum(TreeNode root) {
         // TODO: Implement the logic to find the maximum level sum of the given binary tree.
         Queue<TreeNode> queue = new LinkedList<>();
+        if (root == null){
+            return 0;
+        }
+        queue.add(root);
+        int maxSum = Integer.MIN_VALUE;
 
         while (!queue.isEmpty()) {
             //TODO: Logic to process nodes at the current level will go here.
-        }
+            int level = queue.size();
+            int currentLevelSum  = 0;
 
+            for (int i = 0; i < currentLevelSum; i++){
+                TreeNode currentNode = queue.poll();
+
+              currentLevelSum += currentNode.val;
+              if (currentNode.left != null) {
+                  queue.add(currentNode.left);
+              }
+              if (currentNode.right != null){
+                  queue.add(currentNode.right);
+              }
+            }
+            maxSum = Math.max(maxSum, currentLevelSum);
+
+        }
         //TODO: Placeholder to return the max level sum; replace 0 with the correct value.
-        return 0;
+
+        return maxSum;
     }
 
 
@@ -49,7 +70,6 @@ public class LargestLevelSum {
         if (levelOrder == null || levelOrder.length == 0) {
             return null;
         }
-
 
         TreeNode root = (levelOrder[0] != null) ? new TreeNode(levelOrder[0]) : null;
 
